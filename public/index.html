@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 검색기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 YouTube 검색기</h1>
+            <p>원하는 조건으로 YouTube 영상을 검색하세요</p>
+        </header>
+
+        <form id="searchForm" class="search-form">
+            <div class="form-group">
+                <label for="keyword">검색 키워드 *</label>
+                <input type="text" id="keyword" name="keyword" required placeholder="검색할 키워드를 입력하세요">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="maxResults">검색 결과 개수</label>
+                    <select id="maxResults" name="maxResults">
+                        <option value="10">10개</option>
+                        <option value="20">20개</option>
+                        <option value="30">30개</option>
+                        <option value="50">50개</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="order">정렬 방식</label>
+                    <select id="order" name="order">
+                        <option value="relevance">관련성</option>
+                        <option value="date">최신순</option>
+                        <option value="viewCount">조회수</option>
+                        <option value="rating">평점</option>
+                        <option value="title">제목</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="videoDuration">영상 길이</label>
+                    <select id="videoDuration" name="videoDuration">
+                        <option value="any">전체</option>
+                        <option value="short">4분 미만</option>
+                        <option value="medium">4-20분</option>
+                        <option value="long">20분 이상</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minViews">최소 조회수</label>
+                    <input type="number" id="minViews" name="minViews" placeholder="예: 1000">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="maxSubscribers">최대 구독자수</label>
+                <input type="number" id="maxSubscribers" name="maxSubscribers" placeholder="예: 100000">
+            </div>
+
+            <button type="submit" class="search-btn">
+                <span class="btn-text">검색하기</span>
+                <span class="loading" style="display: none;">검색 중...</span>
+            </button>
+        </form>
+
+        <div id="results" class="results"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
