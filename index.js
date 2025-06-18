@@ -1,3 +1,6 @@
+// 환경변수 로드
+require('dotenv').config();
+
 const express = require('express');
 const { google } = require('googleapis');
 const cors = require('cors');
@@ -23,7 +26,8 @@ app.get('/api/test-env', (req, res) => {
     apiKeyLength: config.YOUTUBE_API_KEY ? config.YOUTUBE_API_KEY.length : 0,
     apiKeyPrefix: config.YOUTUBE_API_KEY ? config.YOUTUBE_API_KEY.substring(0, 10) + '...' : 'undefined',
     nodeEnv: process.env.NODE_ENV,
-    port: config.PORT
+    port: config.PORT,
+    apiKeySource: process.env.YOUTUBE_API_KEY ? 'Environment Variable' : 'Hardcoded'
   });
 });
 
