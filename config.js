@@ -1,8 +1,8 @@
 // YouTube API 설정
-// Google Cloud Console에서 YouTube Data API v3 키를 발급받아 아래에 입력하세요
+// 환경변수 우선, fallback으로 하드코딩된 값 사용
 const config = {
-  YOUTUBE_API_KEY: 'AIzaSyBUlbFKibuqUjQOipuY5hcla3guivT1fqQ',
-  PORT: 3000
+  YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || 'AIzaSyBUlbFKibuqUjQOipuY5hcla3guivT1fqQ',
+  PORT: process.env.PORT || 3000
 };
 
 module.exports = config; 

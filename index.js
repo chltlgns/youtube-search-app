@@ -16,6 +16,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// 환경변수 테스트 엔드포인트 (임시)
+app.get('/api/test-env', (req, res) => {
+  res.json({
+    hasApiKey: !!config.YOUTUBE_API_KEY,
+    apiKeyLength: config.YOUTUBE_API_KEY ? config.YOUTUBE_API_KEY.length : 0,
+    apiKeyPrefix: config.YOUTUBE_API_KEY ? config.YOUTUBE_API_KEY.substring(0, 10) + '...' : 'undefined',
+    nodeEnv: process.env.NODE_ENV,
+    port: config.PORT
+  });
+});
+
 // 메인 페이지
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -35,6 +46,14 @@ app.post('/api/search', async (req, res) => {
 
     if (!keyword) {
       return res.status(400).json({ error: '검색 키워드가 필요합니다.' });
+    }
+
+    // API 키 확인
+    if (!config.YOUTUBE_API_KEY || config.YOUTUBE_API_KEY === 'your_youtube_api_key_here') {
+      return res.status(500).json({ 
+        error: 'YouTube API 키가 설정되지 않았습니다.',
+        details: 'YOUTUBE_API_KEY 환경변수를 확인해주세요.'
+      });
     }
 
     // YouTube API 검색 파라미터 설정
